@@ -39,18 +39,18 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.join(process.cwd(), 'src', 'toc.css'),
-          to: path.join(process.cwd(), 'dist', 'toc.css')
-        }
-        // {
-        //   from: path.join(process.cwd(), 'src', 'assets', 'dark.css'),
-        //   to: path.join(process.cwd(), 'dist', 'dark.css')
-        // }
-      ]
-    })
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       from: path.join(process.cwd(), 'src', 'toc.css'),
+    //       to: path.join(process.cwd(), 'dist', 'toc.css')
+    //     }
+    //     // {
+    //     //   from: path.join(process.cwd(), 'src', 'assets', 'dark.css'),
+    //     //   to: path.join(process.cwd(), 'dist', 'dark.css')
+    //     // }
+    //   ]
+    // })
   ],
   module: {}
 }

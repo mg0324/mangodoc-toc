@@ -39,8 +39,15 @@ export default {
         });
         // 将TOC列表添加到页面中
         $("#app").parent().append($(tocList));
+        let color = "#2196F3";
+        if(window.$mangodoc.themeColor){
+          color = window.$mangodoc.themeColor;
+        }
         // 新增toc按钮
-        $("<i id='toc-oper' class='el-icon-tickets' onclick='window.tocOperFn()'></i>").insertBefore("#toc");
+        $("<i id='toc-oper' class='el-icon-tickets' onclick='window.tocOperFn()'></i>").css("color",color).insertBefore("#toc");
+    },
+    ready(){
+        injectStyle();
     },
     // 监听地址栏变化
     onpopstate(event){
@@ -66,4 +73,124 @@ window.tocOperFn = function(){
     } else {
         v.show("slow");
     }
+}
+
+function injectStyle() {
+    let themeColor = window.$mangodoc.themeColor;
+    if(!themeColor){
+      themeColor = "#409EFF";
+    }
+    const styleEl = document.createElement("style");
+    styleEl.textContent = `
+        #app {
+            width: 80% !important;
+        }
+        
+        #toc {
+            height: fit-content;
+            max-height: 80%;
+            width: 220px;
+            position: fixed;
+            right: 20px;
+            top: 60px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 0px;
+            overflow: auto;
+            list-style: none;
+            background-color: #fff;
+        }
+        
+        /* TOC列表样式 */
+        #toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* TOC条目样式 */
+        #toc li {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* 不同级别的标题条目样式 */
+        #toc li.toc-h1 {
+            color: #F44336;
+        }
+        
+        #toc li.toc-h2 {
+            color: #4CAF50;
+            padding-left: 15px;
+        }
+        
+        #toc li.toc-h3 {
+            color: ${themeColor};
+            padding-left: 30px;
+        }
+        
+        #toc li.toc-h4 {
+            color: #9C27B0;
+            padding-left: 45px;
+        }
+        
+        #toc li.toc-h5 {
+            color: #FFC107;
+            padding-left: 60px;
+        }
+        
+        #toc li.toc-h6 {
+            color: #795548;
+            padding-left: 75px;
+        }
+        
+        /* 锚点链接样式 */
+        #toc a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        #toc a:hover {
+            color: ${themeColor};
+        }
+        
+        #toc .current {
+            border-left: 3px solid ${themeColor};
+        }
+        
+        @media only screen and (max-width: 500px) {
+            #app {
+                width: 100% !important;
+            }
+        
+            #toc {
+                display: none;
+                right: 8px;
+            }
+        
+            #toc-oper {
+                display: block !important;
+                position: fixed;
+                bottom: 8px;
+                right: 8px;
+                z-index: 999;
+                font-size: 25px;
+            }
+        }
+        
+        #toc {
+            height: fit-content;
+            max-height: 80%;
+        }
+        
+        #toc-oper {
+            display: none;
+        }
+    `;
+    document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }
