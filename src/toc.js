@@ -16,6 +16,7 @@ export default {
         var tocList = document.createElement('ul');
         tocList.id = "toc";
         let index = 0;
+        let len = headings.length;
         // 遍历所有标题元素，为每个标题创建一个锚点链接和TOC条目
         headings.forEach(function(heading) {
           index = index + 1;
@@ -37,14 +38,16 @@ export default {
           // 将TOC条目添加到TOC列表中
           tocList.appendChild(tocItem);
         });
-        // 将TOC列表添加到页面中
-        $("#app").parent().append($(tocList));
-        let color = "#2196F3";
-        if(window.$mangodoc.themeColor){
-          color = window.$mangodoc.themeColor;
+        if(length > 0){
+            // 将TOC列表添加到页面中
+            $("#app").parent().append($(tocList));
+            let color = "#2196F3";
+            if(window.$mangodoc.themeColor){
+            color = window.$mangodoc.themeColor;
+            }
+            // 新增toc按钮
+            $("<i id='toc-oper' class='el-icon-tickets' onclick='window.tocOperFn()'></i>").css("color",color).insertBefore("#toc");
         }
-        // 新增toc按钮
-        $("<i id='toc-oper' class='el-icon-tickets' onclick='window.tocOperFn()'></i>").css("color",color).insertBefore("#toc");
     },
     ready(){
         injectStyle();
