@@ -114,13 +114,13 @@ function injectStyle() {
             margin: 5px 0;
             font-size: 14px;
             line-height: 1.5;
-            text-transform: uppercase;
             letter-spacing: 1px;
         }
         
         /* 不同级别的标题条目样式 */
         #toc li.toc-h1 {
             color: #F44336;
+            padding-left: 8px;
         }
         
         #toc li.toc-h2 {
