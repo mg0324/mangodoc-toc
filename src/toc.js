@@ -11,7 +11,7 @@ export default {
             toc = window.$mangodoc.toc;
         }
         // 获取所有标题元素
-        var headings = document.querySelectorAll('#app '+ toc.select);
+        var headings = document.querySelectorAll('#container '+ toc.select);
         // 创建一个新的<ul>元素，用于存储TOC
         var tocList = document.createElement('ul');
         tocList.id = "toc";
@@ -38,9 +38,9 @@ export default {
           // 将TOC条目添加到TOC列表中
           tocList.appendChild(tocItem);
         });
-        if(length > 0){
+        if(len > 0){
             // 将TOC列表添加到页面中
-            $("#app").parent().append($(tocList));
+            $("#container").parent().append($(tocList));
             let color = "#2196F3";
             if(window.$mangodoc.themeColor){
             color = window.$mangodoc.themeColor;
@@ -85,10 +85,6 @@ function injectStyle() {
     }
     const styleEl = document.createElement("style");
     styleEl.textContent = `
-        #app {
-            width: 80% !important;
-        }
-        
         #toc {
             height: fit-content;
             max-height: 80%;
@@ -167,7 +163,7 @@ function injectStyle() {
         }
         
         @media only screen and (max-width: 500px) {
-            #app {
+            #container {
                 width: 100% !important;
             }
         
